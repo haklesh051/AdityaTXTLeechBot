@@ -1,9 +1,7 @@
-FROM python:3.9.7-slim-buster
+FROM python:3.9-slim-bullseye
 
-# Work directory set करो
 WORKDIR /app
 
-# Install required system packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         apt-utils \
@@ -18,11 +16,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy project files
 COPY . .
 
-# Install Python dependencies
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Start the bot
 CMD ["python3", "main.py"]
